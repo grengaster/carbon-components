@@ -1,0 +1,85 @@
+<div class="bx--detail-page-sidebar__container">
+      { (creditNotification || notification) &&
+          <div class="inline-notification-container">
+              { creditNotification &&
+                  <Notification class="inline" title={creditNotification.message} kind={creditNotification.kind}
+                    />
+              }
+              { notification &&
+                  <Notification class="inline" title={notification.message} kind={notification.kind}
+                      />
+              }
+          </div>
+      }
+      <div class={`bx--artifact-details-sidebar-container${artifact.tag ?
+          ` ${artifact.tag}` : ''}${artifact.stageTag ? ` ${artifact.stageTag}` : ''}`}>
+          { (artifact.type === 'runtime' || artifact.type === 'boilerplate') && (
+              <h2 class="description-label">{artifact.name}</h2>
+          )}
+          { artifact.deprecationUrl && artifact.stageTag === 'ibm_deprecated' && (
+              <p class="tag-description stage-tag-description" dangerouslySetInnerHTML={{ __html: i18n.deprecationWarning }}/>
+          )}
+          { artifact.tag === 'ibm_experimental' && (
+              <div class="tag-container">
+                  { isStandardAccount && artifact.accountTag &&
+                      <div class="account-tag">{artifact.accountTagName}</div>
+                  }
+                  <div class="provider-tag">{artifact.tagName}</div>
+                  { artifact.stageTag &&
+                      <div class="stage-tag">{artifact.stageTagName}</div>
+                  }
+              </div>
+          )}
+              <p class="tag-description" dangerouslySetInnerHTML={{ __html: i18n.experimentalDesc }}/>
+          <p class="details-description">{artifact.description}</p>
+              <div class="artifact-margin-addition"></div>
+              <div class="tag-container">
+                      <div class="account-tag">{artifact.accountTagName}</div>
+                  <div class="provider-tag">{artifact.tagName}</div>
+                      <div class="availability-tag">{artifact.availabilityTagName}</div>
+                      <div class="stage-tag">{artifact.stageTagName}</div>
+              </div>
+          }
+          <div class="description-tag-container">
+                  <a class="description-tag-docs-link" href={artifact.docURL} target="_new">
+                      {i18n.viewDocs}
+                  </a>
+                  <a class="description-tag-terms-link" href={artifact.termsUrl} target="_new">
+                      {i18n.viewTerms}
+                  </a>
+          </div>
+
+          <div class="details-container">
+                  <div class="inset-container author-container">
+                      <span class="label author-label">author</span>
+                      <span class="value author-value">author</span>
+                  </div>
+                  <div class="inset-container version-container">
+                      <span class="label version-label">{i18n.version}</span>
+                      <span class="value version-value">{artifact.version}</span>
+                  </div>
+                  <div class="inset-container created-date-container">
+                      <span class="label created-date-label">{i18n.createdDate}</span>
+                      <span class="value created-date-value">{artifact.createdDate}</span>
+                  </div>
+                  <div class="inset-container publish-date-container">
+                      <span class="label publish-date-label">{i18n.publishDate}</span>
+                      <span class="value publish-date-value">{artifact.publishDate}</span>
+                  </div>
+                  <div class="inset-container type-container">
+                      <span class="label type-label">{i18n.type}</span>
+                          <span class="value type-value">{i18n.boilerplate}</span>
+                          <span class="value type-value">{i18n.runtime}</span>
+                          <span class="value type-value">{i18n.service}</span>
+                  </div>
+                  <div class="inset-container location-container">
+                      <span class="label location-label">{i18n.location}</span>
+                      <span class="value location-value">{artifact.locationName}</span>
+                  </div>
+                  <div class="inset-container region-container">
+                      <span class="label region-label">{i18n.region}</span>
+                      <span class="value region-value">{artifact.regionName}</span>
+                  </div>
+          </div>
+      </div>
+  </div>
